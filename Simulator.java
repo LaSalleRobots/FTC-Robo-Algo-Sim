@@ -15,6 +15,7 @@ public class Simulator extends JComponent implements KeyListener, ChangeListener
     private static int roboAngle = 0;
 
     private static JSlider angleSlider = null;
+    private static JEditorPane textPane = null;
 
     static private String lastPressed = "";
 
@@ -36,7 +37,14 @@ public class Simulator extends JComponent implements KeyListener, ChangeListener
 
         window.add(simulator);
         angleSlider = simulator.getSlider();
-        window.add(angleSlider, "Last");
+        textPane = new JEditorPane();
+
+        JSplitPane split = new JSplitPane(JSplitPane.HORIZONTAL_SPLIT);
+
+        split.add(angleSlider);
+        split.add(textPane);
+
+        window.add(split, "Last");
         window.setVisible(true);
 
         while (true) {
@@ -47,7 +55,7 @@ public class Simulator extends JComponent implements KeyListener, ChangeListener
                 // TODO Auto-generated catch block
                 e.printStackTrace();
             }
-            algorithm(gamepad, roboAngle);
+            algorithm(gamepad, Math.toRadians(roboAngle));
             simulator.repaint();
         }
     }
@@ -249,13 +257,13 @@ public class Simulator extends JComponent implements KeyListener, ChangeListener
 
     public static void algorithm(Gamepad gamepad1, double robotHeading) {
 
-        flP = getGamepadMoveMagnitude(gamepad1) * Math.sin(getGamepadMoveAngle(gamepad1) + (Math.PI / 4))
+        flP = getGamepadMoveMagnitude(gamepad1) * Math.sin((getGamepadMoveAngle(gamepad1)-robotHeading) + (Math.PI / 4))
                 + getGamepadTurnMagnitude(gamepad1);
-        blP = getGamepadMoveMagnitude(gamepad1) * Math.sin(getGamepadMoveAngle(gamepad1) - (Math.PI / 4))
+        blP = getGamepadMoveMagnitude(gamepad1) * Math.sin((getGamepadMoveAngle(gamepad1)-robotHeading) - (Math.PI / 4))
                 + getGamepadTurnMagnitude(gamepad1);
-        frP = getGamepadMoveMagnitude(gamepad1) * Math.sin(getGamepadMoveAngle(gamepad1) + (Math.PI / 4))
+        frP = getGamepadMoveMagnitude(gamepad1) * Math.sin((getGamepadMoveAngle(gamepad1)-robotHeading) + (Math.PI / 4))
                 - getGamepadTurnMagnitude(gamepad1);
-        brP = getGamepadMoveMagnitude(gamepad1) * Math.sin(getGamepadMoveAngle(gamepad1) - (Math.PI / 4))
+        brP = getGamepadMoveMagnitude(gamepad1) * Math.sin((getGamepadMoveAngle(gamepad1)-robotHeading) - (Math.PI / 4))
                 - getGamepadTurnMagnitude(gamepad1);
     }
 }
