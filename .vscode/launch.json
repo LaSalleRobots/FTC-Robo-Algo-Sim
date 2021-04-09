@@ -6,6 +6,13 @@
     "configurations": [
         {
             "type": "java",
+            "name": "Launch Simulator",
+            "request": "launch",
+            "mainClass": "Simulator",
+            "projectName": "FTC-Robo-Algo-Sim_d9cc248f"
+        },
+        {
+            "type": "java",
             "name": "Launch Current File",
             "request": "launch",
             "mainClass": "${file}"

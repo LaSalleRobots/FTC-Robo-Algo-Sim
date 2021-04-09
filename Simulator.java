@@ -173,7 +173,6 @@ public class Simulator extends JComponent implements KeyListener, ChangeListener
     }
 
     public void keyPressed(KeyEvent e) {
-        // TODO Auto-generated method stub
         int code = e.getKeyCode();
         lastPressed = KeyEvent.getKeyText(code);
 
@@ -207,7 +206,6 @@ public class Simulator extends JComponent implements KeyListener, ChangeListener
     }
 
     public void keyReleased(KeyEvent e) {
-        // TODO Auto-generated method stub
         int code = e.getKeyCode();
         switch (code) {
         case KeyEvent.VK_W:
@@ -227,7 +225,6 @@ public class Simulator extends JComponent implements KeyListener, ChangeListener
     }
 
     public void stateChanged(ChangeEvent e) {
-        // TODO Auto-generated method stub
         int value = ((JSlider) e.getSource()).getValue();
         roboAngle = value;
     }
